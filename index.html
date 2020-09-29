@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <link rel="stylesheet"
+      href="node_modules/bootstrap4material-1-4-5/distribution/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="node_modules/bootstrap4material-1-4-5/distribution/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="node_modules/bootstrap4material-1-4-5/distribution/css/style.default.css"
+      id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="node_modules/bootstrap4material-1-4-5/distribution/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="node_modules/bootstrap4material-1-4-5/distribution/img/favicon.ico">
+
+    <!-- Bootstrap
+      Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="js/mysql.js"></script>
+    <script src="js/mongodb.js"></script>
+    <title>Space Management System</title>
+  </head>
+
+  <body background="images/login_bg.jpg" style="height: 250%; background-repeat: no-repeat; background-size: cover;">
+
+    <div id="landing_page">
+      <center>
+
+        <div style="color: whitesmoke;margin-top:10%;font-size: 4rem;font-weight: 1000;margin-left:-27rem;">
+          <p><img src="images/satellite.png" width="400;">&nbsp&nbspSATMAN</p>
+        </div>
+
+        <div style="margin-top:2%;background-color: whitesmoke;border-radius: 10%;width:29%;padding-bottom:3rem;">
+          <h1 style="padding-top:5%; font-size: 2rem; margin-top: 4%;">Login as:</h1>
+
+          <button class="btn btn-info" style="margin-right:5%; font-size:1.5rem; margin-top:5%; font-weight: 800;"
+            onclick="switch_to_login_user(); login_null()">User</button>
+          <button class="btn btn-warning" style="margin-right:5%; font-size:1.5rem; margin-top:5%; font-weight: 800;"
+            onclick="switch_to_login_org()">Organisation</button>
+          <button class="btn btn-danger" style=" font-size:1.5rem; margin-top:5%; font-weight: 800;" onclick="
+            switch_to_login_admin()">Admin</button>
+        </div>
+
+        <div style="width: 80%; text-align: justify;margin-top:6%;
+  text-justify: inter-word; background-color: blanchedalmond; padding:1.5rem;border-radius: 5%;">
+          The Satellite Management System is a desktop ready web application that facilitates optimisation of the
+          process of
+          managing of satellite information on three fronts. From a End user's perspective, the application allows them
+          to track
+          and view the satellite's position, orbit, field of view and time of passing of satellite above a specific
+          location on
+          Earth, and view various orbit parameters, right from their user account. From the satellite manufacturer's
+          perspective,
+          it allows organization to browse through the satellite manufactured by them and also track their orbit in
+          order to
+          detect some defects in the satellite's orbit (if any). The owner organization can add, modify and update the
+          satellite's
+          information which they own and can view satellite's owned by other organizations. The admin of the SATMAN
+          system has all
+          the functionality that a satellite owner has, as well as an admin can add/remove users and organizations from
+          the
+          database. Other supporting functionality includes automatically procuring the Two Line Element (TLE) data from
+          NORAD's
+          satellite database, in order to update the satellite's orbit plotting, from the internet. The current systems
+          available
+          are either for only end users or only for organizations. The SATMAN system, aims to unify this process into
+          one smooth
+          application which can be used by all classes of access holders with the required level of authorization.
+        </div>
+      </center>
+    </div>
+
+    <!--  ****************************************************************    -->
+
+    <!-- Login pages -->
+
+    <div id="login_content_user">
+
+      <center>
+        <div style="color: whitesmoke;margin-top:10%;font-size: 4rem;font-weight: 1000;margin-left:-27rem;">
+
+          <p><img src="images/satellite.png" width="400;">&nbsp&nbspSATMAN</p>
+        </div>
+        <div id="login_form"
+          style="margin-top:3%;background-color: whitesmoke;border-radius: 10%;width:22%;padding-bottom:3rem;">
+          <img src="images/scientist.png" style="align-self: center;width:10rem;margin-top:-5rem;border: 100px;">
+          <br>
+          <form action="#" onsubmit="login_user(); login_null();">
+            <input id="user_username" type="text" class="form-control" placeholder="Username"
+              style="margin-top:0;margin:2rem;width:80%;margin-bottom:0;height:3rem;" required>
+            <input id="user_password" type="password" class="form-control" placeholder="Password"
+              style="width:80%;margin:2rem;margin-top:1rem;height:3rem;margin-bottom:0" required>
+            <div>
+              <p id="user_notif" style="color: red;font-size: 1.1rem;margin-top: 1rem;font-weight: 600;">
+              </p>
+            </div>
+            <input type="submit" class="btn btn-primary" style="font-size: 1.3rem;width:8rem;margin-right:1.0rem;"
+              value="Login">
+            <button type="button" class=" btn btn-primary" onclick="switch_to_signup_user()"
+              style="font-size: 1.3rem;color: white;width:8rem;">Register</button>
+            </a>
+          </form>
+        </div>
+        <br><br>
+        <button class="btn btn-default" onclick="switch_to_landing_page()">Go back</button>
+      </center>
+    </div>
+
+    <div id="login_content_org">
+
+      <center>
+        <div style="color: whitesmoke;margin-top:10%;font-size: 4rem;font-weight: 1000;margin-left:-27rem;">
+
+          <p><img src="images/satellite.png" width="400;">&nbsp&nbspSATMAN</p>
+        </div>
+        <div id="login_form"
+          style="margin-top:3%;background-color: whitesmoke;border-radius: 10%;width:22%;padding-bottom:3rem;">
+          <img src="images/launch.png" style="align-self: center;width:10rem;margin-top:-5rem;border: 100px;">
+          <br>
+          <form>
+            <input id="org_username" type="text" class="form-control" placeholder="Username"
+              style="margin-top:0;margin:2rem;width:80%;margin-bottom:0;height:3rem;" required>
+            <input id="org_password" type="password" class="form-control" placeholder="Password"
+              style="width:80%;margin:2rem;margin-top:1rem;height:3rem;margin-bottom:0" required>
+            <br>
+            <div style="text-align: left; margin-left:10%;">
+              <label class="radio-inline"><input type="radio" name="optradio" checked value="1"> Manufacturing
+                Organisation</label><br>
+              <label class="radio-inline"><input type="radio" name="optradio" value="2"> Owner </label>
+            </div>
+            <div>
+              <p id="org_notif" style="color: red;font-size: 1.1rem;margin-top: 1rem;font-weight: 600;">
+              </p>
+
+              <input type="button" class="btn btn-primary" onclick="login_org()"
+                style="font-size: 1.3rem;width:8rem;margin-right:1.0rem;" value="Login">
+              <button type="button" class=" btn btn-primary" onclick="switch_to_signup_org()"
+                style="font-size: 1.3rem;color: white;width:8rem;">Register</button>
+            </div>
+          </form>
+
+        </div>
+        <br><br>
+        <button class="btn btn-default" onclick="switch_to_landing_page()">Go back</button>
+      </center>
+    </div>
+
+    <div id="login_content_admin">
+
+      <center>
+        <div style="color: whitesmoke;margin-top:10%;font-size: 4rem;font-weight: 1000;margin-left:-27rem;">
+
+          <p><img src="images/satellite.png" width="400;">&nbsp&nbspSATMAN</p>
+        </div>
+        <div id="login_form"
+          style="margin-top:3%;background-color: whitesmoke;border-radius: 10%;width:22%;padding-bottom:3rem;">
+          <img src="images/admin.png" style="align-self: center;width:10rem;margin-top:-5rem;border: 100px;">
+          <br>
+          <form>
+            <input id="admin_username" type="text" class="form-control" placeholder="Username"
+              style="margin-top:0;margin:2rem;width:80%;margin-bottom:0;height:3rem;" required>
+            <input id="admin_password" type="password" class="form-control" placeholder="Password"
+              style="width:80%;margin:2rem;margin-top:1rem;height:3rem;margin-bottom:0" required>
+            <div>
+              <p id="admin_notif" style="color: red;font-size: 1.1rem;margin-top: 1rem;font-weight: 600;">
+              </p>
+            </div>
+            <input type="button" class="btn btn-primary" onclick="login_admin()"
+              style="font-size: 1.3rem;width:8rem;margin-right:1.0rem;" value="Login">
+            </a>
+          </form>
+        </div>
+        <br><br>
+        <button class="btn btn-default" onclick="switch_to_landing_page()">Go back</button>
+      </center>
+    </div>
+
+
+
+
+    <!--  ****************************************************************    -->
+
+    <!--Sign up pages-->
+
+    <div id="signup_content_user">
+      <center>
+        <div class=" signin_form_user">
+          <br>
+          <form action="#" onsubmit="signup_user()">
+            <p style="font-size: 2.5rem;margin-top:1rem;margin-bottom:1.5rem;font-weight: 700;">Enter user details:</p>
+
+            <div class="name">
+              First Name:<br>
+              <input type="text" class="form-control" id="user_first_name" style="width:100%" required>
+            </div>
+
+            <div class="name">
+              Last Name:<br>
+              <input type="text" class="form-control" id="user_last_name" style="width:100%" required>
+            </div>
+
+            <div class="name">
+              Email Id:<br>
+              <input type="email" class="form-control" id="user_email_id" style="width:100%" required>
+            </div>
+
+            <div class="date">
+              Date of Birth:<br>
+              <input type="date" class="form-control" id="user_dob" style="width:100%" min="1900-01-01" max="2003-12-31"
+                required>
+            </div>
+
+            <div class="name">
+              Username:<br>
+              <input type="text" class="form-control" id="user_username_ent" style="width:100%" minlength="5" required>
+              <h4 id="user_username_validate" style="color: red;margin-top:1rem;"></h4>
+            </div>
+
+            <div class="name">
+              Password:<br>
+              <input type="password" class="form-control" id="user_password_ent" style="width:100%" minlength="8"
+                required>
+            </div>
+
+            <div class="form-group" style="float:left;width:89%;text-align:left;margin-left:5%">
+              Name of the Institute / Organisation:<br>
+              <input type="text" class="form-control" id="user_organisation" style=" width:100%" required>
+            </div>
+
+            <div class="form-group" style="float:left;width:89%;text-align:left;margin-left:5%">
+              Address:<br>
+              <input type="text" class="form-control" id="user_address" style="width:100%" required>
+            </div>
+
+            <div class="name">
+              <input type="file" id="user_image_input" required>
+            </div>
+
+            <div class="form-group" style="float:left;width:89%;text-align:left;margin-left:5%">
+              <label class="checkbox-inline" style="margin-right:2.5%;"><input type="checkbox" id="user_terms_checkbox">
+                &nbsp &nbsp I hereby declare that the above information
+                provided is
+                valid and
+                correct with respect to my knowledge
+              </label>
+              <h4 id="user_terms_text" style="color: red;"></h4>
+            </div>
+
+            <div class="form-group" style="float:left;width:89%;text-align:left;margin-left:5%;">
+              <button type="button" class=" btn btn-primary" onclick="switch_to_login_user()">
+                <span style="font-size: 1.3rem;">Go back to login page</span>
+              </button>
+              <input type="submit" class=" btn btn-primary" style="margin-left:1%;font-size: 1.3rem;">
+            </div>
+          </form>
+
+        </div>
+      </center>
+    </div>
+
+
+
+
+    <div id="signup_content_org">
+      <center>
+        <div class=" signin_form_org">
+          <br>
+          <form action="#" onsubmit="signup_org()">
+            <p style="font-size: 2.5rem;margin-top:1rem;margin-bottom:1.5rem;font-weight: 700;">Enter the organisation
+              details:
+            </p>
+
+            <div class="name">
+              Name Of The Organisation:<br>
+              <input type="text" class="form-control" id="org_name" style="width:100%" required>
+            </div>
+
+            <div class="name">
+              Email Id:<br>
+              <input type="email" class="form-control" id="org_email_id" style="width:100%" required>
+            </div>
+
+            <div class="name">
+              Phone number:<br>
+              <input type="text" class="form-control" id="org_phone" style="width:100%" required>
+            </div>
+
+            <div class="name">
+              Username:<br>
+              <input type="text" class="form-control" id="org_username_ent" style="width:100%" minlength="5" required>
+              <h4 id="org_username_validate" style="color: red;margin-top:1rem;"></h4>
+            </div>
+
+            <div class="name">
+              Password:<br>
+              <input type="password" class="form-control" id="org_password_ent" style="width:100%" minlength="8"
+                required>
+            </div>
+
+            <div class="type">
+              Type of user:<br>
+              <label class="checkbox-inline type" style="margin-right:2.5%"><input type="checkbox" name="type"
+                  value="owner" style="margin-right:0%">&nbsp&nbspOwner</label>
+              <label class="checkbox-inline type" style="margin-right:2.5%"><input type="checkbox" name="type"
+                  value="manufacturing_organisation" style="margin-right:0%">&nbsp&nbspManufacturing
+                Organisation</label>
+            </div>
+
+            <div class="name">
+              Country:<br>
+              <input type="text" class="form-control" id="org_country" style="width:100%" required>
+            </div>
+
+            <div class="form-group" style="float:left;width:89%;text-align:left;margin-left:5%">
+              <label class="checkbox-inline" style="margin-right:2.5%;"><input type="checkbox" id="org_terms_checkbox">
+                &nbsp &nbsp I hereby declare that the above information
+                provided is
+                valid and
+                correct with respect to my knowledge
+              </label>
+              <h4 id="org_terms_text" style="color: red;"></h4>
+            </div>
+
+            <div class="form-group" style="float:left;width:89%;text-align:left;margin-left:5%;">
+              <button type="button" class=" btn btn-primary" onclick="switch_to_login_org()">
+                <span style="font-size: 1.3rem;">Go back to login page</span>
+              </button>
+              <input type="submit" class=" btn btn-primary" style="margin-left:1%;font-size: 1.3rem;">
+            </div>
+          </form>
+
+        </div>
+      </center>
+    </div>
+
+
+    <!--  ********************************************************************************  -->
+
+    <!--Top Nav Bar-->
+
+    <div id="dashboard">
+
+      <header class="header">
+        <nav class="navbar">
+          <!-- Search Box-->
+          <div class="search-box">
+            <button class="dismiss"><i class="icon-close"></i></button>
+            <form id="searchForm" action="#" role="search">
+              <input type="search" placeholder="What are you looking for..." class="form-control">
+            </form>
+          </div>
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <!-- Navbar Header-->
+              <div class="navbar-header">
+                <!-- Navbar Brand --><a href="#" class="navbar-brand d-none d-sm-inline-block" style="width:8rem;"><img
+                    src="images/satellite1.png" width=30%">
+                  <div class="brand-text d-none d-lg-inline-block"><strong>SATMAN </strong>
+                  </div>
+                </a>
+              </div>
+              <!-- Navbar Menu -->
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+                <!-- Logout    -->
+                <li class="nav-item" onclick="switch_to_landing_page()"><a href="#" class="nav-link logout"> <span
+                      class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+
+
+      <!-- ***************************************************************************  -->
+
+      <!-- Side Navbar -->
+      <div class="page-content d-flex align-items-stretch">
+        <!-- Side Navbar -->
+        <nav class="side-navbar">
+          <!-- Sidebar Header-->
+          <div class="sidebar-header d-flex align-items-center">
+
+
+            <div id="sidebar_user">
+              <div class="avatar"><img src="images/account.png" alt="..." class="img-fluid rounded-circle"
+                  style="width:100%;height:100%" id="user_image"></div>
+              <div class="title">
+                <br>
+                <h1 class="h4">User</h1>
+                <p>Cyber Security Professional</p>
+              </div>
+              <!-- Sidebar Navigation Menus-->
+              <br>
+              <span class="heading" style="font-size:1.3rem;color: blue;"><b></b>Menu</b></span>
+              <ul class="list-unstyled">
+                <li class="list_values " onclick="switch_to_home_user()"><a href="#"> <i
+                      class="icon-home"></i><span>Home</span></a>
+                </li>
+                <li class="list_values" onclick="switch_to_search_user()"><a href="#"> <i class="icon-grid"></i>Search
+                  </a>
+                </li>
+                <li class="list_values"><a href="#" onclick="switch_to_dev_user()"> <i class="icon-screen"></i>
+                    Developers
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+
+            <div id="sidebar_org">
+              <div class="avatar"><img src="images/manufacture.png" alt="..." class="img-fluid rounded-circle"
+                  style="width:100%;height:100%"></div>
+              <div class="title">
+                <br>
+                <h1 class="h4">Organisation</h1>
+                <p>Cyber Security Professional</p>
+              </div>
+              <!-- Sidebar Navigation Menus-->
+              <br>
+              <span class="heading" style="font-size:1.3rem;color: blue;"><b></b>Menu</b></span>
+              <ul class="list-unstyled">
+                <li class="list_values " onclick="switch_to_home_org()"><a href="#"> <i
+                      class="icon-home"></i><span>Home</span></a>
+                </li>
+                <li class="list_values" onclick="switch_to_search_org()"><a href="#"> <i class="icon-grid"></i>Search
+                  </a>
+                </li>
+                <li class="list-values" onclick="switch_to_my_satellites()"><a href="#"><i
+                      class="icon-interface-windows"></i>My Satellites</a>
+                </li>
+                <li class="list_values" id="sidebar_add_org" onclick="switch_to_addSat_org()"><a href="#"> <i
+                      class="icon-padnote"></i>Add
+                    Satellites
+                  </a>
+                </li>
+                <li class="list_values"><a href="#" onclick="switch_to_dev_org()"> <i class="icon-screen"></i>
+                    Developers
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+
+            <div id="sidebar_admin">
+              <div class="avatar"><img src="images/admin.png" alt="..." class="img-fluid rounded-circle"
+                  style="width:100%;height:100%"></div>
+              <div class="title">
+                <br>
+                <h1 class="h4">Admin</h1>
+                <p>Cyber Security Professional</p>
+              </div>
+              <!-- Sidebar Navigation Menus-->
+              <br>
+              <span class="heading" style="font-size:1.3rem;color: blue;"><b></b>Menu</b></span>
+              <ul class="list-unstyled">
+                <li class="list_values " onclick="switch_to_home_admin()"><a href="#"> <i
+                      class="icon-home"></i><span>Home</span></a>
+                </li>
+                <li class="list_values" onclick="switch_to_search_admin()"><a href="#"> <i class="icon-grid"></i>Search
+                  </a>
+                </li>
+                <li class="list_values" onclick="switch_to_addSat_admin()"><a href="#"> <i class="icon-padnote"></i>Add
+                    Satellites
+                  </a>
+                </li>
+                <li class="list_values"><a href="#" onclick="switch_to_dev_admin()"> <i class="icon-screen"></i>
+                    Developers
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </nav>
+
+
+        <!-- *********************************************   -->
+
+        <!-- Main content-->
+
+        <div class="page-content d-flex align-items-stretch" style="width:100%;">
+          <div class="content-inner" style="width: 100%;">
+            <div id="home_user">
+              <!-- Page Header-->
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">Dashboard</h1>
+                </div>
+              </header>
+              <!-- Dashboard Counts Section-->
+              <section class="dashboard-counts no-padding-bottom">
+                <div class="container-fluid">
+                  <div class="row bg-white has-shadow">
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-violet"><i class="icon-user"></i></div>
+                        <div class="title"><span>Number of<br>Users</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_users1"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-red">
+                          <!--<i class="icon-padnote"></i>--><img src="images/satellite1.png" width="100%"></div>
+                        <div class="title"><span>Number of<br>Satellites</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="150"
+                              aria-valuemin="0" aria-valuemax="1000" class="progress-bar bg-red"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_sat1"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-green">
+                          <!--<i class="icon-bill"></i>--><img src="images/manufacture.png" width="100%">
+                        </div>
+                        <div class="title"><span>Number of<br>Manufacturing Organisation</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_manu_users1"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-orange">
+                          <!--<i class="icon-padnote"></i>--><img src="images/launch.png" width="100%"></div>
+                        <div class="title"><span>Number of<br>Owner Organisation</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_launch_users1"></strong></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!--  Main Content Of the page  -->
+
+              <!-- Dashboard Header Section    -->
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <div class="row" style="width:100%;">
+                    <div class="col bg-white" style="left:1.0rem;width:10%;">
+
+                      <div class="card-header d-flex align-items-center">
+                        <h3 class="h1">Profile Details</h3>
+                      </div>
+
+                      <div class="card-body">
+                        <form action="#" onsubmit="modify_profile_user()">
+                          <div style="width:47%;float:left">
+                            <h2>User ID: <span id="user_profile_uid" class="profile_data"></span>
+                            </h2>
+                            <hr>
+                            <h2>First Name:&nbsp; <input type="text" id="user_profile_fname" class="profile_data"
+                                required></h2>
+
+                            <hr>
+                            <h2>Email ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="email" class="profile_data" id="user_profile_email" required></h2>
+                            <hr>
+                            <h2>Date of birth:
+                              <input type="text" class="profile_data" id="user_profile_dob" style="margin-left: 0.5rem;"
+                                required>
+
+                            </h2>
+                            <p style="color: red;">*Enter the date of birth in yyyy-mm-dd</p>
+                            <hr>
+                            <h2>Username:
+                              <input type="text" class="profile_data" id="user_profile_username"
+                                style="margin-left: 1.7rem;" disabled></h2>
+                            <hr>
+
+                          </div>
+
+                          <div style="width:47%;float:right">
+                            <br>
+                            <hr>
+                            <h2>Last Name:
+                              <input type="text" class="profile_data" id="user_profile_lname"
+                                style="margin-left: 7.6rem;" required>
+                            </h2>
+                            <hr>
+                            <h2>Institute / Organisation:
+                              <input type="text" id="user_profile_org" required></h2>
+                            <hr>
+                            <h2 style="display: inline;">Address:
+                            </h2>
+                            <textarea id="user_profile_address" style="width: 20rem;margin-left: 9rem;"
+                              required></textarea>
+                            <hr>
+                            <h2>Password:
+                              <input type="password" id="user_profile_password" style="margin-left: 8rem;" required>
+                            </h2>
+                            <hr>
+                            <h2>Change profile picture:</h2>
+                            <input type="file" id="change_user_image">
+                          </div>
+                          <div>
+                            <input type="submit" class="btn btn-danger" style="margin-left: 2%;" value="Modify Details">
+
+                            <b>
+                              <p style="font-size: 1.2rem;text-align: inherit;margin-top:2% " id="modify_notif_user">
+                              </p>
+                            </b>
+                          </div>
+                        </form>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div id="home_org">
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h2 class="no-margin-bottom">Dashboard</h2>
+                </div>
+              </header>
+              <!-- Dashboard Counts Section-->
+              <section class="dashboard-counts no-padding-bottom">
+                <div class="container-fluid">
+                  <div class="row bg-white has-shadow">
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-violet"><i class="icon-user"></i></div>
+                        <div class="title"><span>Number of<br>Users</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_users2"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-red">
+                          <!--<i class="icon-padnote"></i>--><img src="images/satellite1.png" width="100%"></div>
+                        <div class="title"><span>Number of<br>Satellites</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="150"
+                              aria-valuemin="0" aria-valuemax="1000" class="progress-bar bg-red"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_sat2"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-green">
+                          <!--<i class="icon-bill"></i>--><img src="images/manufacture.png" width="100%">
+                        </div>
+                        <div class="title"><span>Number of<br>Manufacturing Organisation</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_manu_users2"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-orange">
+                          <!--<i class="icon-padnote"></i>--><img src="images/launch.png" width="100%"></div>
+                        <div class="title"><span>Number of<br>Owner Organisation</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_launch_users2"></strong></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <div class="row" style="width:100%;">
+                    <div class="col bg-white" style="left:1.0rem;width:10%;">
+
+                      <div class="card-header d-flex align-items-center">
+                        <h3 class="h1">Profile Details</h3>
+                      </div>
+
+                      <div class="card-body">
+                        <form action="#" onsubmit="modify_profile_org()">
+                          <div style="width:47%;float:left">
+
+                            <h2 id="org_head" style="display: inline;"></h2>
+                            <hr>
+                            <h2>Name: <input type="text" id="org_profile_name" class="profile_data" required></h2>
+
+                            <hr>
+                            <h2>Email ID:
+                              <input type="email" class="profile_data" id="org_profile_email" required></h2>
+                            <hr>
+
+                            <h2>Username:
+                              <input type="text" class="profile_data" id="org_profile_username" disabled></h2>
+                            <hr>
+
+                          </div>
+
+                          <div style="width:47%;float:right">
+                            <br>
+                            <hr>
+                            <h2>Phone number:
+                              <input type="text" class="profile_data" id="org_profile_phone" required></h2>
+                            <hr>
+                            <h2>Country:
+                              <input type="text" id="org_profile_country" required></h2>
+                            <hr>
+
+                            <h2>Password:
+                              <input type="password" id="org_profile_password" required></h2>
+                            <hr>
+                          </div>
+                          <div style="float:left;width: 100%;">
+                            <input type=" submit" class="btn btn-danger" onclick="modify_profile_org()"
+                              value="Modify Details" style="width:8rem;">
+
+                            <b>
+                              <p style="font-size: 1.2rem;margin-top:2% " id="modify_notif_org"></p>
+                            </b>
+
+                          </div>
+                        </form>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+
+            <div id="home_admin">
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">Dashboard</h1>
+                </div>
+              </header>
+              <!-- Dashboard Counts Section-->
+              <section class="dashboard-counts no-padding-bottom">
+                <div class="container-fluid">
+                  <div class="row bg-white has-shadow">
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-violet"><i class="icon-user"></i></div>
+                        <div class="title"><span>Number of<br>Users</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                          </div>
+                        </div>
+                        <div class="number">
+                          <strong id="num_of_users3">5</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-red">
+                          <!--<i class="icon-padnote"></i>--><img src="images/satellite1.png" width="100%"></div>
+                        <div class="title"><span>Number of<br>Satellites</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="150"
+                              aria-valuemin="0" aria-valuemax="1000" class="progress-bar bg-red"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_sat3"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-green">
+                          <!--<i class="icon-bill"></i>--><img src="images/manufacture.png" width="100%">
+                        </div>
+                        <div class="title"><span>Number of<br>Manufacturing Organisation</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_manu_users3"></strong></div>
+                      </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="col-xl-3 col-sm-6">
+                      <div class="item d-flex align-items-center">
+                        <div class="icon bg-orange">
+                          <!--<i class="icon-padnote"></i>--><img src="images/launch.png" width="100%"></div>
+                        <div class="title"><span>Number of<br>Owner Organisation</span>
+                          <div class="progress">
+                            <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50"
+                              aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                          </div>
+                        </div>
+                        <div class="number"><strong id="num_of_launch_users3">50</strong></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <div class="row" style="width:100%;">
+                    <div class="col bg-white" style="left:1.0rem;width:10%;">
+
+                      <div class="card-header d-flex align-items-center">
+                        <h3 class="h1">Profile Details</h3>
+                      </div>
+
+                      <div class="card-body">
+                        <form action="#" onsubmit="modify_profile_admin()">
+                          <div style="width:47%;float:left">
+
+
+                            <h2>First Name: <input type="text" id="admin_profile_first_name" class="profile_data"></h2>
+                            <hr>
+                            <h2>Username:
+                              <input type="text" class="profile_data" id="admin_profile_username" disabled></h2>
+                            <hr>
+
+                          </div>
+
+                          <div style="width:47%;float:right">
+
+                            <h2>Last Name:
+                              <input type="text" class="profile_data" id="admin_profile_last_name"></h2>
+                            <hr>
+                            <h2>Password:
+                              <input type="password" id="admin_profile_password"></h2>
+                            <hr>
+                          </div>
+
+                          <div>
+                            <p style="font-size: 1.3rem;text-align: inherit;margin-top:2%; font-weight: 700;"
+                              id="modify_notif_admin">
+                            </p>
+                            <input type="submit" class="btn btn-danger" style="margin-left: 2%;" value="Modify Details">
+                          </div>
+                        </form>
+
+                        <button class="btn btn-success" id="add_admin_btn" style="margin-left:10rem;margin-top:-3.8rem"
+                          onclick="show_add_admin()">Add
+                          admin</button>
+
+                        <hr>
+                        <div id="add_admin_page" style="margin-top:-7%;">
+                          <form onsubmit="add_admin()" action="#">
+                            <h1 style="padding-top:5%; font-size: 2rem; margin-top: 4%;">Admin Registration:</h1>
+                            <br>
+                            <h3 style="display: inline;">First Name: </h3><input type="text" id="add_admin_fname"
+                              required><br><br>
+                            <h3 style="display: inline;">Last Name:</h3> <input type="text" id="add_admin_lname"
+                              required><br><br>
+                            <h3 style="display: inline;">Username:</h3> &nbsp;<input type="text" id="add_admin_username"
+                              minlength="5" required><br><br>
+                            <h3 style="display: inline;">Password:</h3>&nbsp; <input type="password"
+                              id="add_admin_password" minlength="5" required>
+                            <br>
+                            <br>
+                            <input type="submit" class="btn btn-danger" value="Register">&nbsp;
+                          </form>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+
+            <!--Developer Page-->
+            <div id="developer_details_user">
+
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">Developers</h1>
+                </div>
+              </header>
+              <div class="row" style="margin-top:3rem;">
+                <div class="col" style="margin-left:2rem;">
+                  <center>
+                    <div class="hvrbox">
+                      <img src="images/face.jpeg" alt="Abijith" class="hvrbox-layer_bottom"
+                        style="border-radius: 10%;width:100%;height:40rem">
+                      <div class="hvrbox-layer_top">
+                        <div class="hvrbox-text">Name: Abijith Trichur Ramachandran<br>USN: 1RV17CS006</div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+                <div class="col">
+                  <center>
+                    <div class="hvrbox">
+                      <img src="images/abeer.jpg" alt="Abeer" class="hvrbox-layer_bottom"
+                        style="border-radius: 10%;width:150%;height:40rem">
+                      <div class="hvrbox-layer_top" style="width:100%">
+                        <div class="hvrbox-text" style="width:100%">Name: Abeer Vaishnav<br>USN: 1RV17CS004</div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+            <!---   *************************************************************************** -->
+
+
+
+
+
+            <div id="search_page">
+
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">Search </h1>
+                </div>
+              </header>
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <center>
+                    <div class="row" style="width:80%;">
+                      <div class="col bg-white" style="left:1.0rem;width:100%;">
+                        <!--    <div class="card-header d-flex align-items-center">
+                          <input class="form-control" type="text" placeholder="Search Me">
+                        </div>
+-->
+                        <div class="card-body">
+                          <form action="#" onsubmit="search_data()" style="width: 100%;">
+                            <input class="form-control" type="text" placeholder="Search Me" id="textbar" required>
+                            <input type="submit" class="btn btn-info" value="Search" style="margin-top: 2%;">
+                            <p id="none_found" style="color: red;"></p>
+                          </form>
+
+                          <div id="search_results">
+                            <div class="row" style="width:100%;">
+                              <div class="col bg-white" style="left:1.0rem;width:10%;">
+                                <div class="card-body">
+                                  <hr>
+                                  <table class="table table-bordered table-hover">
+                                    <thead class='thead-dark'>
+                                      <tr>
+                                        <th>SID</th>
+                                        <th>Name</th>
+                                        <th>Purpose</th>
+                                        <th>Detailed Purpose</th>
+                                        <th> NORAD Number </th>
+                                        <th>Users</th>
+                                        <th>More Details</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="search_results_data">
+
+                                    </tbody>
+
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              </section>
+
+            </div>
+
+
+
+            <div class="modal fade" id="more_details_search" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:200%">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="margin-top:1%;margin-left:12%">
+                <div class="modal-content" style="width:300%">
+                  <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">More Details</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+                    <table class="table table-bordered table-hover">
+                      <thead class='thead-dark'>
+                        <tr>
+                          <th>SID</th>
+                          <th>Name</th>
+                          <th>Purpose</th>
+                          <th>Detailed Purpose</th>
+                          <th>Class Of Orbit</th>
+                          <th>Type of Orbit</th>
+                          <th>Longitude of Geo</th>
+                          <th>Perigree (km)</th>
+                          <th>Apogee (km)</th>
+                        </tr>
+                      <tbody id="search_learn_more_data_1">
+
+                      </tbody>
+
+                      <thead class='thead-dark'>
+                        <tr>
+                          <th>Eccentricity</th>
+                          <th>Inclination (deg)</th>
+                          <th>Period (min)</th>
+                          <th>Launch Mass (kg)</th>
+                          <th>Dry Mass (kg)</th>
+                          <th>Power (Watts)</th>
+                          <th>Launch Date</th>
+                          <th>Expected Lifetime (Years)</th>
+                          <th>Launch Vehicle</th>
+                        </tr>
+                      <tbody id="search_learn_more_data_2">
+
+                      </tbody>
+
+                      <thead class='thead-dark'>
+                        <tr>
+                          <th>Users</th>
+                          <th>NORAD Number</th>
+                          <th>Manufacturing Organisation</th>
+                          <th>Owner Organisation</th>
+                          <th>Launch Location</th>
+                        </tr>
+                      </thead>
+                      <tbody id="search_learn_more_data_3">
+
+                      </tbody>
+                    </table>
+                    <div id="del-area" style="float:right">
+                      <button class="btn btn-danger" onclick="admin_sat_delete()">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="modal fade" id="modify_admin_details_my_sat" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:200%">
+              HELLOOO
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document"
+                style="margin-top:1%;margin-left:12%">
+                <div class="modal-content" style="width:300%">
+                  <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Modify Details</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="#" onsubmit="modify_admin_sat_change()">
+                      <div class="reg_sat_data" style="width: 33%;float: left;">
+                        <b>
+                          <p class="sat_data">Name:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_name" required>
+
+                        <b>
+                          <p class="sat_data">Purpose:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_purpose" required>
+
+                        <b>
+                          <p class="sat_data">Detailed Purpose:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_detailed_purpose" required>
+
+                        <b>
+                          <p class="sat_data">Class of orbit:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_class_of_orbit" required>
+
+                        <b>
+                          <p class="sat_data">Type of orbit:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_type_of_orbit" required>
+
+                        <b>
+                          <p class="sat_data">Launch Date:
+                        </b>
+                        </b> <input class="form-control" type="date" id="admin_mod_sat_launch_date" style="width:90%;"
+                          required>
+
+                        <b>
+                          <p class="sat_data">Expected Lifetime Years:
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.1" id="admin_mod_sat_lifetime"
+                          style="width:90%;" required>
+
+                        <br>
+                        <input type="submit" class="btn btn-danger"
+                          style="font-size:20px;margin-left:1rem;margin-top:1rem" value="Modify details">
+                        <p style="display: inline;font-size: 1.2rem;font-weight: 600;padding-left: 0rem;"
+                          id="admin_mod_sat_notif"></p>
+
+                      </div>
+
+                      <div class="reg_sat_data" style="width:33%;float: left;" required>
+                        <b>
+                          <p class="sat_data">Lonigtude of geo:
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.001" id="admin_mod_sat_longitude"
+                          style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Perigree (km):
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.001" id="admin_mod_sat_perigree"
+                          style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Apogee (km):
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.001" id="admin_mod_sat_apogee"
+                          style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Eccentricity:
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.000000000000000001"
+                          id="admin_mod_sat_eccentricity" style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Inclination (Degrees):
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.001" id="admin_mod_sat_inclination"
+                          style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Period Minuted:
+                        </b>
+                        </b> <input class="form-control" type="number" step="0.01" id="admin_mod_sat_period"
+                          style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Launch Mass (kg):
+                        </b>
+                        </b> <input class="form-control" type="number" id="admin_mod_sat_launch_mass" style="width:90%;"
+                          required>
+
+                        <b>
+                          <p class="sat_data">Dry Mass (kg):
+                        </b>
+                        </b> <input class="form-control" type="number" id="admin_mod_sat_dry_mass" style="width:90%;"
+                          required>
+                      </div>
+                      <div class="reg_sat_data" style="width:33%;float:left">
+
+
+                        <b>
+                          <p class="sat_data">Power (Watts):
+                        </b>
+
+                        <input class="form-control" type="number" id="admin_mod_sat_power" style="width:90%;" required>
+
+                        <b>
+                          <p class="sat_data">Users:
+                        </b>
+                        <input class="form-control" type="text" id="admin_mod_sat_users" required>
+
+                        <b>
+                          <p class="sat_data">Launch Vehicle:
+                        </b>
+                        <input class="form-control" type="text" id="admin_mod_sat_vehicle" required>
+
+                        <b>
+                          <p class="sat_data">NORAD Number:
+                        </b>
+                        </b> <input class="form-control" type="number" id="admin_mod_sat_norad" style="width:90%;"
+                          required>
+
+                        <b>
+                          <p class="sat_data">Manufacturing Organisation name:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_man_org_name" required>
+
+                        <b>
+                          <p class="sat_data">Owner name:
+                        </b>
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_owner_name" required>
+
+                        <b>
+                          <p class="sat_data">Launch Location:
+
+                        </b> <input class="form-control" type="text" id="admin_mod_sat_launch_loc" required>
+
+                      </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- **********************************************************************************88888888888888888888888-->
+
+
+            <!--Adding satellites-->
+
+            <div id="addSat_admin">
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">Satellite Registration</h1>
+                </div>
+              </header>
+
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <div class="row" style="width:100%;">
+                    <div class="col bg-white" style="left:1.0rem;width:10%;">
+
+                      <div class="card-header d-flex align-items-center">
+                        <h2 class="h2">Enter the satellite details:</h2>
+                      </div>
+
+                      <div class="card-body">
+                        <form action="#" onsubmit="add_satellite_admin()">
+                          <div class="reg_sat_data" style="width: 33%;float: left;">
+                            <b>
+                              <p class="sat_data">Name:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_name" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Purpose:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_purpose" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Detailed Purpose:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_detailed_purpose" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Class of orbit:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_class_of_orbit" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Type of orbit:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_type_of_orbit" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Launch Date:
+                            </b>
+                            </b> <input class="form-control" type="date" id="sat_launch_date" style="width:90%;"
+                              required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Expected Lifetime Years:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.1" id="sat_lifetime"
+                              style="width:90%;" required>
+
+                            <br>
+                            <input type="submit" class="btn btn-danger"
+                              style="font-size:20px;margin-left:1rem;margin-top:1rem">
+                            <p style="display: inline;font-size: 1.2rem;font-weight: 600;padding-left: 0rem;"
+                              id="addSat_notif"></p>
+
+                          </div>
+
+                          <div class="reg_sat_data" style="width:33%;float: left;" required>
+                            <b>
+                              <p class="sat_data">Lonigtude of geo:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="sat_longitude"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Perigree (km):
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="sat_perigree"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Apogee (km):
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="sat_apogee"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Eccentricity:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.000000001" id="sat_eccentricity"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Inclination (Degrees):
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="sat_inclination"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Period Minuted:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.01" id="sat_period"
+                              style="width:90%;" required>
+                            <hr style="margin-right: 2.1rem;">
+                            <b>
+                              <p class="sat_data">Launch Mass (kg):
+                            </b>
+                            </b> <input class="form-control" type="number" id="sat_launch_mass" style="width:90%;"
+                              required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Dry Mass (kg):
+                            </b>
+                            </b> <input class="form-control" type="number" id="sat_dry_mass" style="width:90%;"
+                              required>
+                          </div>
+                          <div class="reg_sat_data" style="width:33%;float:left">
+
+
+                            <b>
+                              <p class="sat_data">Power (Watts):
+                            </b>
+
+                            <input class="form-control" type="number" id="sat_power" style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Users:
+                            </b>
+                            <input class="form-control" type="text" id="sat_users" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Launch Vehicle:
+                            </b>
+                            <input class="form-control" type="text" id="sat_vehicle" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">NORAD Number:
+                            </b>
+                            </b> <input class="form-control" type="number" id="sat_norad" style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Manufacturing Organisation name:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_man_org_name" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Owner name:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_owner_name" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Launch Location:
+                            </b>
+                            </b> <input class="form-control" type="text" id="sat_launch_loc" required>
+                            <hr>
+                          </div>
+
+                        </form>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div id="addSat_org">
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">Satellite Registration</h1>
+                </div>
+              </header>
+
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <div class="row" style="width:100%;">
+                    <div class="col bg-white" style="left:1.0rem;width:10%;">
+
+                      <div class="card-header d-flex align-items-center">
+                        <h2 class="h2">Enter the satellite details:</h2>
+                      </div>
+
+                      <div class="card-body">
+                        <form action="#" onsubmit="add_satellite_org()">
+                          <div class="reg_sat_data" style="width: 33%;float: left;">
+                            <b>
+                              <p class="sat_data">Name:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_name" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Purpose:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_purpose" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Detailed Purpose:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_detailed_purpose" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Class of orbit:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_class_of_orbit" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Type of orbit:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_type_of_orbit" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Launch Date:
+                            </b>
+                            </b> <input class="form-control" type="date" id="org_sat_launch_date" style="width:90%;"
+                              required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Expected Lifetime Years:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.1" id="org_sat_lifetime"
+                              style="width:90%;" required>
+                            <br>
+                            <input type="submit" class="btn btn-danger"
+                              style="font-size:20px;margin-left:1rem;margin-top:1rem">
+                            <p style="display: inline;font-size: 1.2rem;font-weight: 600;padding-left: 0.5rem;"
+                              id="org_addSat_notif"></p>
+
+                          </div>
+
+                          <div class="reg_sat_data" style="width:33%;float: left;" required>
+                            <b>
+                              <p class="sat_data">Lonigtude of geo:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="org_sat_longitude"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Perigree (km):
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="org_sat_perigree"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Apogee (km):
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="org_sat_apogee"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Eccentricity:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.000000001" id="org_sat_eccentricity"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Inclination (Degrees):
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.001" id="org_sat_inclination"
+                              style="width:90%;" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Period Minuted:
+                            </b>
+                            </b> <input class="form-control" type="number" step="0.01" id="org_sat_period"
+                              style="width:90%;" required>
+                            <hr style="margin-right: 2.1rem;">
+                            <b>
+                              <p class="sat_data">Launch Mass (kg):
+                            </b>
+                            </b> <input class="form-control" type="number" id="org_sat_launch_mass" style="width:90%;"
+                              required>
+
+
+
+                          </div>
+                          <div class="reg_sat_data" style="width:33%;float:left">
+
+                            <b>
+                              <p class="sat_data">Dry Mass (kg):
+                            </b>
+                            </b> <input class="form-control" type="number" id="org_sat_dry_mass" style="width:90%;"
+                              required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Power (Watts):
+                            </b>
+                            </b> <input class="form-control" type="number" id="org_sat_power" style="width:90%;"
+                              required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Users:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_users" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Launch Vehicle:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_vehicle" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">NORAD Number:
+                            </b>
+                            </b> <input class="form-control" type="number" id="org_sat_norad" style="width:90%;"
+                              required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Manufacturing Organisation name:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_man_org_name" required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Owner name:
+                            </b>
+                            </b> <input class="form-control" type="text" id="org_sat_owner_name" disabled required>
+                            <hr>
+                            <b>
+                              <p class="sat_data">Launch Location:
+                            </b>
+                            <input class="form-control" type="text" id="org_sat_launch_loc" required>
+
+                          </div>
+
+                        </form>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div id="my_satellites">
+              <header class="page-header">
+                <div class="container-fluid">
+                  <h1 class="no-margin-bottom">My Satellites </h1>
+                </div>
+              </header>
+              <section class="dashboard-header">
+                <div class="container-fluid">
+                  <div class="row" style="width:100%;">
+                    <div class="col bg-white" style="left:1.0rem;width:10%;">
+
+                      <div class="card-header d-flex align-items-center">
+                        <h3 class="h1">Satellite Details</h3>
+                      </div>
+
+                      <div class="card-body">
+
+                        <table class="table table-bordered table-hover">
+                          <thead class='thead-dark'>
+                            <tr>
+                              <th>SID</th>
+                              <th>Name</th>
+                              <th>Purpose</th>
+                              <th>Detailed Purpose</th>
+                              <th> NORAD Number </th>
+                              <th>Users</th>
+                              <th>More Details</th>
+                            </tr>
+                          </thead>
+                          <tbody id="my_satellite_data">
+
+                          </tbody>
+
+                        </table>
+                        <br>
+
+                        <br>
+                        <div class="modal fade" id="more_details_my_sat" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:200%">
+                          <div class="modal-dialog modal-dialog-centered" role="document"
+                            style="margin-top:1%;margin-left:12%">
+                            <div class="modal-content" style="width:300%">
+                              <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLabel">More Details</h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </button>
+                              </div>
+                              <div class="modal-body">
+
+                                <table class="table table-bordered table-hover">
+                                  <thead class='thead-dark'>
+                                    <tr>
+                                      <th>SID</th>
+                                      <th>Name</th>
+                                      <th>Purpose</th>
+                                      <th>Detailed Purpose</th>
+                                      <th>Class Of Orbit</th>
+                                      <th>Type of Orbit</th>
+                                      <th>Longitude of Geo</th>
+                                      <th>Perigree (km)</th>
+                                      <th>Apogee (km)</th>
+                                    </tr>
+                                  <tbody id="my_sat_learn_more_data_1">
+
+                                  </tbody>
+
+                                  <thead class='thead-dark'>
+                                    <tr>
+                                      <th>Eccentricity</th>
+                                      <th>Inclination (deg)</th>
+                                      <th>Period (min)</th>
+                                      <th>Launch Mass (kg)</th>
+                                      <th>Dry Mass (kg)</th>
+                                      <th>Power (Watts)</th>
+                                      <th>Launch Date</th>
+                                      <th>Expected Lifetime (Years)</th>
+                                      <th>Launch Vehicle</th>
+                                    </tr>
+                                  <tbody id="my_sat_learn_more_data_2">
+
+                                  </tbody>
+
+                                  <thead class='thead-dark'>
+                                    <tr>
+                                      <th>Users</th>
+                                      <th>NORAD Number</th>
+                                      <th>Manufacturing Organisation</th>
+                                      <th>Owner Organisation</th>
+                                      <th>Launch Location</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="my_sat_learn_more_data_3">
+
+                                  </tbody>
+                                </table>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div class="modal fade" id="modify_details_my_sat" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:200%">
+                          <div class="modal-dialog modal-dialog-centered modal-lg" role="document"
+                            style="margin-top:1%;margin-left:12%">
+                            <div class="modal-content" style="width:300%">
+                              <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLabel">Modify Details</h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="#" onsubmit="modify_sat_change()">
+                                  <div class="reg_sat_data" style="width: 33%;float: left;">
+                                    <b>
+                                      <p class="sat_data">Name:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_name" required>
+
+                                    <b>
+                                      <p class="sat_data">Purpose:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_purpose" required>
+
+                                    <b>
+                                      <p class="sat_data">Detailed Purpose:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_detailed_purpose" required>
+
+                                    <b>
+                                      <p class="sat_data">Class of orbit:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_class_of_orbit" required>
+
+                                    <b>
+                                      <p class="sat_data">Type of orbit:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_type_of_orbit" required>
+
+                                    <b>
+                                      <p class="sat_data">Launch Date:
+                                    </b>
+                                    </b> <input class="form-control" type="date" id="mod_sat_launch_date"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Expected Lifetime Years:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.1" id="mod_sat_lifetime"
+                                      style="width:90%;" required>
+
+                                    <br>
+                                    <input type="submit" class="btn btn-danger"
+                                      style="font-size:20px;margin-left:1rem;margin-top:1rem" value="Modify details">
+                                    <p style="display: inline;font-size: 1.2rem;font-weight: 600;padding-left: 0rem;"
+                                      id="mod_sat_notif"></p>
+
+                                  </div>
+
+                                  <div class="reg_sat_data" style="width:33%;float: left;" required>
+                                    <b>
+                                      <p class="sat_data">Lonigtude of geo:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001" id="mod_sat_longitude"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Perigree (km):
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001" id="mod_sat_perigree"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Apogee (km):
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001" id="mod_sat_apogee"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Eccentricity:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.000000000000000001"
+                                      id="mod_sat_eccentricity" style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Inclination (Degrees):
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001" id="mod_sat_inclination"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Period Minuted:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.01" id="mod_sat_period"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Launch Mass (kg):
+                                    </b>
+                                    </b> <input class="form-control" type="number" id="mod_sat_launch_mass"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Dry Mass (kg):
+                                    </b>
+                                    </b> <input class="form-control" type="number" id="mod_sat_dry_mass"
+                                      style="width:90%;" required>
+                                  </div>
+                                  <div class="reg_sat_data" style="width:33%;float:left">
+
+
+                                    <b>
+                                      <p class="sat_data">Power (Watts):
+                                    </b>
+
+                                    <input class="form-control" type="number" id="mod_sat_power" style="width:90%;"
+                                      required>
+
+                                    <b>
+                                      <p class="sat_data">Users:
+                                    </b>
+                                    <input class="form-control" type="text" id="mod_sat_users" required>
+
+                                    <b>
+                                      <p class="sat_data">Launch Vehicle:
+                                    </b>
+                                    <input class="form-control" type="text" id="mod_sat_vehicle" required>
+
+                                    <b>
+                                      <p class="sat_data">NORAD Number:
+                                    </b>
+                                    </b> <input class="form-control" type="number" id="mod_sat_norad" style="width:90%;"
+                                      required>
+
+                                    <b>
+                                      <p class="sat_data">Manufacturing Organisation name:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_man_org_name" required>
+
+                                    <b>
+                                      <p class="sat_data">Owner name:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="mod_sat_owner_name" required
+                                      disabled>
+
+                                    <b>
+                                      <p class="sat_data">Launch Location:
+
+                                    </b> <input class="form-control" type="text" id="mod_sat_launch_loc" required>
+
+                                  </div>
+
+                                </form>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                        <!--
+
+                        <div class="modal fade" id="modify_admin_details_my_sat" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:200%">
+                          HELLOOO
+                          <div class="modal-dialog modal-dialog-centered modal-lg" role="document"
+                            style="margin-top:1%;margin-left:12%">
+                            <div class="modal-content" style="width:300%">
+                              <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLabel">Modify Details</h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="#" onsubmit="modify_admin_sat_change()">
+                                  <div class="reg_sat_data" style="width: 33%;float: left;">
+                                    <b>
+                                      <p class="sat_data">Name:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_name" required>
+
+                                    <b>
+                                      <p class="sat_data">Purpose:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_purpose" required>
+
+                                    <b>
+                                      <p class="sat_data">Detailed Purpose:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_detailed_purpose"
+                                      required>
+
+                                    <b>
+                                      <p class="sat_data">Class of orbit:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_class_of_orbit"
+                                      required>
+
+                                    <b>
+                                      <p class="sat_data">Type of orbit:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_type_of_orbit"
+                                      required>
+
+                                    <b>
+                                      <p class="sat_data">Launch Date:
+                                    </b>
+                                    </b> <input class="form-control" type="date" id="admin_mod_sat_launch_date"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Expected Lifetime Years:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.1"
+                                      id="admin_mod_sat_lifetime" style="width:90%;" required>
+
+                                    <br>
+                                    <input type="submit" class="btn btn-danger"
+                                      style="font-size:20px;margin-left:1rem;margin-top:1rem" value="Modify details">
+                                    <p style="display: inline;font-size: 1.2rem;font-weight: 600;padding-left: 0rem;"
+                                      id="admin_mod_sat_notif"></p>
+
+                                  </div>
+
+                                  <div class="reg_sat_data" style="width:33%;float: left;" required>
+                                    <b>
+                                      <p class="sat_data">Lonigtude of geo:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001"
+                                      id="admin_mod_sat_longitude" style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Perigree (km):
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001"
+                                      id="admin_mod_sat_perigree" style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Apogee (km):
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001"
+                                      id="admin_mod_sat_apogee" style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Eccentricity:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.000000000000000001"
+                                      id="admin_mod_sat_eccentricity" style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Inclination (Degrees):
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.001"
+                                      id="admin_mod_sat_inclination" style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Period Minuted:
+                                    </b>
+                                    </b> <input class="form-control" type="number" step="0.01" id="admin_mod_sat_period"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Launch Mass (kg):
+                                    </b>
+                                    </b> <input class="form-control" type="number" id="admin_mod_sat_launch_mass"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Dry Mass (kg):
+                                    </b>
+                                    </b> <input class="form-control" type="number" id="admin_mod_sat_dry_mass"
+                                      style="width:90%;" required>
+                                  </div>
+                                  <div class="reg_sat_data" style="width:33%;float:left">
+
+
+                                    <b>
+                                      <p class="sat_data">Power (Watts):
+                                    </b>
+
+                                    <input class="form-control" type="number" id="admin_mod_sat_power"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Users:
+                                    </b>
+                                    <input class="form-control" type="text" id="admin_mod_sat_users" required>
+
+                                    <b>
+                                      <p class="sat_data">Launch Vehicle:
+                                    </b>
+                                    <input class="form-control" type="text" id="admin_mod_sat_vehicle" required>
+
+                                    <b>
+                                      <p class="sat_data">NORAD Number:
+                                    </b>
+                                    </b> <input class="form-control" type="number" id="admin_mod_sat_norad"
+                                      style="width:90%;" required>
+
+                                    <b>
+                                      <p class="sat_data">Manufacturing Organisation name:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_man_org_name"
+                                      required>
+
+                                    <b>
+                                      <p class="sat_data">Owner name:
+                                    </b>
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_owner_name" required
+                                      disabled>
+
+                                    <b>
+                                      <p class="sat_data">Launch Location:
+
+                                    </b> <input class="form-control" type="text" id="admin_mod_sat_launch_loc" required>
+
+                                  </div>
+
+                                </form>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+-->
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+
+
+
+            <script src="js/index.js">
+            </script>
+            <!-- JavaScript files-->
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/jquery/jquery.min.js">
+            </script>
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/popper.js/umd/popper.min.js">
+            </script>
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/bootstrap/js/bootstrap.min.js">
+            </script>
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/jquery.cookie/jquery.cookie.js">
+            </script>
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/chart.js/Chart.min.js">
+            </script>
+            <script
+              src="node_modules/bootstrap4material-1-4-5/distribution/vendor/jquery-validation/jquery.validate.min.js">
+            </script>
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/js/charts-home.js">
+            </script>
+            <!-- Main File-->
+            <script src="node_modules/bootstrap4material-1-4-5/distribution/js/front.js"></script>
+  </body>
+
+
+</html>

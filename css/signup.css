@@ -1,0 +1,50 @@
+.signin_form_user {
+    margin-top: 10rem;
+    background-color: whitesmoke;
+    border-radius: 3%;
+    width: 75%;
+    padding-bottom: 3rem;
+    opacity: 0.9;
+    font-size: 1.3rem;
+    height: 49rem;
+}
+
+.signin_form_org {
+    margin-top: 10rem;
+    background-color: whitesmoke;
+    border-radius: 3%;
+    width: 75%;
+    padding-bottom: 3rem;
+    opacity: 0.9;
+    font-size: 1.3rem;
+    height: 50rem;
+}
+
+
+.name {
+    float: left;
+    width: 42%;
+    text-align: left;
+    margin-left: 5%;
+    margin-bottom: 1.5%;
+}
+
+.date {
+    float: left;
+    text-align: left;
+    margin-left: 5%;
+    margin-bottom: 1.5%;
+    width: 18%;
+}
+
+.type {
+    float: left;
+    text-align: left;
+    margin-left: 5%;
+    margin-bottom: 1.5%;
+    width: 100%;
+}
+
+button {
+    border-radius: 15%;
+}

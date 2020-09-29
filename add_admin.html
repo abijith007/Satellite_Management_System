@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/signup.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <link rel="stylesheet"
+            href="node_modules/bootstrap4material-1-4-5/distribution/vendor/font-awesome/css/font-awesome.min.css">
+        <!-- Fontastic Custom icon font-->
+        <link rel="stylesheet" href="node_modules/bootstrap4material-1-4-5/distribution/css/fontastic.css">
+        <!-- Google fonts - Poppins -->
+        <!-- theme stylesheet-->
+        <link rel="stylesheet" href="node_modules/bootstrap4material-1-4-5/distribution/css/style.default.css"
+            id="theme-stylesheet">
+        <!-- Custom stylesheet - for your changes-->
+        <link rel="stylesheet" href="node_modules/bootstrap4material-1-4-5/distribution/css/custom.css">
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="node_modules/bootstrap4material-1-4-5/distribution/img/favicon.ico">
+
+        <!-- Bootstrap
+      Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/popper.js/dist/popper.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script src="js/mysql.js"></script>
+
+        <title>Admin Regisration</title>
+    </head>
+
+    <body background="images/admin_page.png"
+        style="height: 150%; background-repeat: no-repeat; background-size: cover;">
+
+        <center>
+
+            <div style="margin-top:2%;background-color: whitesmoke;border-radius: 10%;width:70%;padding-bottom:3rem;">
+                <h1 style="padding-top:5%; font-size: 2rem; margin-top: 4%;">Admin Registration:</h1>
+                <br>
+                First Name: <input type="text" id="add_admin_fname"><br>
+                Last Name: <input type="text" id="add_admin_lname"><br>
+                Username: &nbsp;<input type="text" id="add_admin_username"><br>
+                Password:&nbsp; &nbsp; <input type="password" id="add_admin_password">
+                <br>
+                <p style="font-size: 1.3rem;" id="add_admin_notif"></p>
+                <br>
+                <button class="btn btn-danger" onclick="add_admin()">Register</button>&nbsp;
+                <button class="btn btn-info">Go back</button>
+            </div>
+        </center>
+
+
+
+
+        <script src="js/index.js"></script>
+        <!-- JavaScript files-->
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/jquery/jquery.min.js"></script>
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/popper.js/umd/popper.min.js"> </script>
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/jquery.cookie/jquery.cookie.js">
+        </script>
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/vendor/chart.js/Chart.min.js"></script>
+        <script
+            src="node_modules/bootstrap4material-1-4-5/distribution/vendor/jquery-validation/jquery.validate.min.js">
+        </script>
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/js/charts-home.js"></script>
+        <!-- Main File-->
+        <script src="node_modules/bootstrap4material-1-4-5/distribution/js/front.js"></script>
+    </body>
+
+</html>
